@@ -4,25 +4,25 @@
 
 ### 1. **Banco de Dados**
 ```bash
-MONGODB_URI = mongodb+srv://username:password@cluster.mongodb.net/forbet_db
+MONGODB_URI = mongodb+srv://markboy:ystzX9EsxXi3uSjT@forbetai.zrxuia.mongodb.net/?retryWrites=true&w=majority&appName=forbetai
 ```
 
 ### 2. **Autenticação Clerk**
 ```bash
-CLERK_SECRET_KEY = sk_test_seu_secret_key_aqui
-CLERK_PUBLISHABLE_KEY = pk_test_seu_publishable_key_aqui
+CLERK_SECRET_KEY = sk_live_iLjecd0s8P3CA29iaSJy4kw6QcoRpkcdHsUyXFwtCO
+CLERK_PUBLISHABLE_KEY = pk_live_Y2xlcmsuZm9yYmV0YWkuY29tJA
 ```
 
 ### 3. **CORS e Frontend**
 ```bash
-FRONTEND_URL = https://seu-projeto.vercel.app
+FRONTEND_URL = https://www.forbetai.com/
 NODE_ENV = production
 ```
 
 ### 4. **API SportMonks (Opcional - para dados reais)**
 ```bash
 SPORTMONKS_BASE_URL = https://api.sportmonks.com/v3
-SPORTMONKS_API_KEY = sua_api_key_sportmonks
+SPORTMONKS_API_KEY = dAziKmSVXxOi63TgaEYvKLY3nOFkx3lEOYuoUtxJPhhBHIvdvu7DSaLaRHc7B
 ```
 
 ## 📋 Como Configurar no Railway
