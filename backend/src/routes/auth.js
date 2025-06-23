@@ -1,6 +1,5 @@
 import express from 'express';
-import clerkPkg from '@clerk/backend';
-const { requireAuth } = clerkPkg;
+import { requireAuth } from '../middleware/auth.js';
 
 const router = express.Router();
 

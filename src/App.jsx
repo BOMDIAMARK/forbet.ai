@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '@clerk/clerk-react';
 import './App.css';
-import './styles/enhanced-ux.css';
+;
 
 // Páginas Públicas
 import { LandingPage } from './pages/LandingPage';

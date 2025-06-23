@@ -1,6 +1,6 @@
 import express from 'express';
-import clerkPkg from '@clerk/backend';
-const { requireAuth } = clerkPkg;import Prediction from '../models/Prediction.js';
+import { requireAuth } from '../middleware/auth.js';
+import Prediction from '../models/Prediction.js';
 import User from '../models/User.js';
 
 const router = express.Router();

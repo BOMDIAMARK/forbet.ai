@@ -3,10 +3,9 @@ import cors from 'cors';
 import helmet from 'helmet';
 import compression from 'compression';
 import rateLimit from 'express-rate-limit';
+import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import { connectDB } from './src/config/database.js';
-import clerkPkg from '@clerk/backend';
-const { clerkMiddleware } = clerkPkg;
 
 // Import routes
 import authRoutes from './src/routes/auth.js';
@@ -44,8 +43,8 @@ app.use(cors({
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
-// Clerk middleware
-app.use(clerkMiddleware());
+// Cookie parser for session cookies
+app.use(cookieParser());
 
 // Health check
 app.get('/health', (req, res) => {

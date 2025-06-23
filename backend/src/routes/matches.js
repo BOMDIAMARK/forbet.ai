@@ -1,6 +1,6 @@
 import express from 'express';
-import clerkPkg from '@clerk/backend';
-const { requireAuth } = clerkPkg;import SportMonksService from '../services/SportMonksService.js';
+import { requireAuth } from '../middleware/auth.js';
+import SportMonksService from '../services/SportMonksService.js';
 
 const router = express.Router();
 
