@@ -14,3 +14,4 @@ createRoot(document.getElementById('root')).render(
     </ClerkProviderWrapper>
   </StrictMode>,
 )
+console.log('ForBet.AI loading...');
