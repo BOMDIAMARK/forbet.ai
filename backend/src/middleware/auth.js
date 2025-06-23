@@ -1,41 +1,41 @@
 import clerkPkg from '@clerk/backend';
-const { verifyToken } = clerkPkg;
+const { createClerkClient } = clerkPkg;
 
 // Custom auth middleware that works with @clerk/backend
 export const requireAuth = () => {
   return async (req, res, next) => {
     try {
-      // Get token from Authorization header or cookie
-      let token;
-      
-      // Check Authorization header
-      const authHeader = req.headers.authorization;
-      if (authHeader && authHeader.startsWith('Bearer ')) {
-        token = authHeader.substring(7); // Remove 'Bearer ' prefix
-      }
-      
-      // Check session cookie if no Bearer token
-      if (!token) {
-        token = req.cookies.__session || req.cookies['__clerk_token'];
-      }
-      
-      if (!token) {
+      // Create a Clerk client instance
+      const clerkClient = createClerkClient({
+        secretKey: process.env.CLERK_SECRET_KEY,
+        publishableKey: process.env.CLERK_PUBLISHABLE_KEY,
+      });
+
+      // Use authenticateRequest to verify the request
+      const { isSignedIn, toAuth } = await clerkClient.authenticateRequest(req, {
+        authorizedParties: [
+          'http://localhost:3000', 
+          'http://localhost:3001',
+          'https://forbetai-production.up.railway.app',
+          process.env.FRONTEND_URL
+        ].filter(Boolean)
+      });
+
+      if (!isSignedIn) {
         return res.status(401).json({
           error: 'Authentication required',
-          message: 'No authentication token provided'
+          message: 'User not authenticated'
         });
       }
-      
-      // Verify the token with Clerk
-      const payload = await verifyToken(token, {
-        secretKey: process.env.CLERK_SECRET_KEY
-      });
+
+      // Get auth information
+      const auth = toAuth();
       
       // Add auth info to request object
       req.auth = {
-        userId: payload.sub,
-        sessionId: payload.sid,
-        sessionClaims: payload
+        userId: auth.userId,
+        sessionId: auth.sessionId,
+        sessionClaims: auth.sessionClaims
       };
       
       next();
@@ -43,7 +43,7 @@ export const requireAuth = () => {
       console.error('Auth middleware error:', error);
       return res.status(401).json({
         error: 'Authentication failed',
-        message: 'Invalid or expired token'
+        message: error.message || 'Invalid or expired token'
       });
     }
   };
