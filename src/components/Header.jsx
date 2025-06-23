@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { Button } from './ui/button';
-import { Badge } from './ui/badge';
 import { 
   Bell, 
   Settings, 
@@ -32,20 +30,20 @@ export function Header({ user, onLogout }) {
     switch (plan) {
       case 'premium':
         return (
-          <Badge className="bg-gradient-warning text-white hover-glow">
+          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-yellow-400 to-orange-500 text-white hover:shadow-lg transition-all">
             <Crown className="w-3 h-3 mr-1" />
             Premium
-          </Badge>
+          </span>
         );
       case 'pro':
         return (
-          <Badge className="bg-gradient-primary text-white hover-glow">
+          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:shadow-lg transition-all">
             <Star className="w-3 h-3 mr-1" />
             Pro
-          </Badge>
+          </span>
         );
       default:
-        return <Badge variant="secondary" className="hover-scale">Gratuito</Badge>;
+        return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 transition-all">Gratuito</span>;
     }
   };
 
@@ -63,7 +61,7 @@ export function Header({ user, onLogout }) {
   };
 
   return (
-    <header className="header-enhanced px-6 py-4 sticky top-0 z-40 animate-fade-in">
+    <header className="bg-white shadow-lg border-b border-gray-200 px-6 py-4 sticky top-0 z-40">
       <div className="flex items-center justify-between">
         {/* Left side - Search */}
         <div className="flex items-center space-x-4">
@@ -72,16 +70,16 @@ export function Header({ user, onLogout }) {
             <input
               type="text"
               placeholder="Buscar times, jogos..."
-              className="input-enhanced pl-10 pr-4 py-2 w-64 focus-enhanced"
+              className="bg-white border border-gray-300 rounded-lg pl-10 pr-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
-            <div className="absolute inset-0 rounded-lg bg-gradient-primary opacity-0 group-hover:opacity-10 transition-opacity pointer-events-none" />
+            <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-10 transition-opacity pointer-events-none" />
           </div>
         </div>
 
         {/* Right side - User actions */}
         <div className="flex items-center space-x-4">
           {/* Plan Badge */}
-          <div className="animate-slide-in-right">
+          <div>
             {getPlanBadge(user?.plan)}
           </div>
 
@@ -100,29 +98,27 @@ export function Header({ user, onLogout }) {
 
           {/* Notifications */}
           <div className="relative">
-            <Button
-              variant="ghost"
-              size="sm"
+            <button
               onClick={() => setShowNotifications(!showNotifications)}
-              className="relative p-2 hover-lift transition-all"
+              className="relative p-2 rounded-lg hover:bg-gray-100 transition-all duration-200 hover:shadow-md"
             >
               <Bell className="w-5 h-5" />
               {unreadCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-gradient-danger text-white text-xs rounded-full w-5 h-5 flex items-center justify-center animate-bounce-custom">
+                <span className="absolute -top-1 -right-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center animate-bounce">
                   {unreadCount}
                 </span>
               )}
-            </Button>
+            </button>
 
             {showNotifications && (
-              <div className="absolute right-0 mt-2 w-80 card-enhanced z-50 animate-slide-in-right">
+              <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 z-50">
                 <div className="p-4 border-b border-gray-200">
                   <div className="flex items-center justify-between">
-                    <h3 className="font-semibold text-gradient-primary">Notificações</h3>
+                    <h3 className="font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Notificações</h3>
                     {unreadCount > 0 && (
-                      <Badge className="bg-gradient-primary text-white">
+                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-blue-500 to-purple-600 text-white">
                         {unreadCount} novas
-                      </Badge>
+                      </span>
                     )}
                   </div>
                 </div>
@@ -150,27 +146,26 @@ export function Header({ user, onLogout }) {
                   ))}
                 </div>
                 <div className="p-4 border-t border-gray-200">
-                  <Button variant="ghost" size="sm" className="w-full hover-lift">
+                  <button className="w-full text-center py-2 px-4 rounded-lg hover:bg-gray-100 transition-all duration-200 text-sm font-medium text-gray-700 hover:shadow-md">
                     Ver todas as notificações
-                  </Button>
+                  </button>
                 </div>
               </div>
             )}
           </div>
 
           {/* Settings */}
-          <Button variant="ghost" size="sm" className="p-2 hover-lift transition-all tooltip" data-tooltip="Configurações">
+          <button className="p-2 rounded-lg hover:bg-gray-100 transition-all duration-200 hover:shadow-md" title="Configurações">
             <Settings className="w-5 h-5" />
-          </Button>
+          </button>
 
           {/* User Menu */}
           <div className="relative">
-            <Button
-              variant="ghost"
+            <button
               onClick={() => setShowUserMenu(!showUserMenu)}
-              className="flex items-center space-x-2 p-2 hover-lift transition-all"
+              className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 transition-all duration-200 hover:shadow-md"
             >
-              <div className="w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center text-white font-medium text-sm hover-glow">
+              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-medium text-sm hover:shadow-lg transition-all">
                 {user?.name?.charAt(0) || 'U'}
               </div>
               <div className="text-left hidden sm:block">
@@ -180,10 +175,10 @@ export function Header({ user, onLogout }) {
               <ChevronDown className="w-4 h-4 transition-transform" style={{
                 transform: showUserMenu ? 'rotate(180deg)' : 'rotate(0deg)'
               }} />
-            </Button>
+            </button>
 
             {showUserMenu && (
-              <div className="absolute right-0 mt-2 w-48 card-enhanced z-50 animate-slide-in-right">
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 z-50">
                 <div className="p-4 border-b border-gray-200">
                   <div className="font-medium">{user?.name || 'Usuário'}</div>
                   <div className="text-sm text-gray-500">{user?.email}</div>
@@ -193,21 +188,21 @@ export function Header({ user, onLogout }) {
                 </div>
                 
                 <div className="py-2">
-                  <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 flex items-center space-x-2 transition-all hover-lift">
+                  <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 flex items-center space-x-2 transition-all hover:shadow-md">
                     <User className="w-4 h-4" />
                     <span>Meu Perfil</span>
                   </button>
-                  <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 flex items-center space-x-2 transition-all hover-lift">
+                  <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 flex items-center space-x-2 transition-all hover:shadow-md">
                     <Settings className="w-4 h-4" />
                     <span>Configurações</span>
                   </button>
                   {user?.plan === 'free' && (
-                    <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 flex items-center space-x-2 text-blue-600 transition-all hover-lift">
+                    <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 flex items-center space-x-2 text-blue-600 transition-all hover:shadow-md">
                       <Crown className="w-4 h-4" />
                       <span>Fazer Upgrade</span>
-                      <Badge className="ml-auto bg-gradient-warning text-white text-xs">
+                      <span className="ml-auto bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs px-2 py-1 rounded-full">
                         50% OFF
-                      </Badge>
+                      </span>
                     </button>
                   )}
                 </div>
@@ -215,7 +210,7 @@ export function Header({ user, onLogout }) {
                 <div className="border-t border-gray-200 py-2">
                   <button
                     onClick={onLogout}
-                    className="w-full text-left px-4 py-2 text-sm hover:bg-red-50 flex items-center space-x-2 text-red-600 transition-all hover-lift"
+                    className="w-full text-left px-4 py-2 text-sm hover:bg-red-50 flex items-center space-x-2 text-red-600 transition-all hover:shadow-md"
                   >
                     <LogOut className="w-4 h-4" />
                     <span>Sair</span>
