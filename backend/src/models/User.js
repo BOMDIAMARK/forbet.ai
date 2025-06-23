@@ -4,8 +4,7 @@ const userSchema = new mongoose.Schema({
   clerkId: {
     type: String,
     required: true,
-    unique: true,
-    index: true
+    unique: true
   },
   email: {
     type: String,
@@ -97,7 +96,6 @@ const userSchema = new mongoose.Schema({
 
 // Indexes for performance
 userSchema.index({ clerkId: 1 });
-userSchema.index({ email: 1 });
 userSchema.index({ subscriptionTier: 1 });
 userSchema.index({ createdAt: -1 });
 

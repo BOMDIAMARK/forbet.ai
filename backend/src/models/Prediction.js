@@ -3,13 +3,11 @@ import mongoose from 'mongoose';
 const predictionSchema = new mongoose.Schema({
   userId: {
     type: String,
-    required: true,
-    index: true
+    required: true
   },
   matchId: {
     type: String,
-    required: true,
-    index: true
+    required: true
   },
   
   // Match details
