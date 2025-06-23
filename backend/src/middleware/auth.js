@@ -1,5 +1,4 @@
-import clerkPkg from '@clerk/backend';
-const { createClerkClient } = clerkPkg;
+import { createClerkClient } from '@clerk/backend';
 
 // Custom auth middleware that works with @clerk/backend
 export const requireAuth = () => {
