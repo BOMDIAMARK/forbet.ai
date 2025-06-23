@@ -5,7 +5,8 @@ import compression from 'compression';
 import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
 import { connectDB } from './src/config/database.js';
-import { clerkMiddleware } from '@clerk/backend';
+import clerkPkg from '@clerk/backend';
+const { clerkMiddleware } = clerkPkg;
 
 // Import routes
 import authRoutes from './src/routes/auth.js';

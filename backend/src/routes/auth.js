@@ -1,5 +1,6 @@
 import express from 'express';
-import { requireAuth } from '@clerk/backend';
+import clerkPkg from '@clerk/backend';
+const { requireAuth } = clerkPkg;
 
 const router = express.Router();
 
@@ -25,4 +26,4 @@ router.get('/session', requireAuth(), (req, res) => {
   });
 });
 
-export default router; 
+export default router;
